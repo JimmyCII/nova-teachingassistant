@@ -69,7 +69,7 @@ Whenever you make changes to your local code, prompts, or tools, you do **not** 
 To push your latest changes live to the cloud, simply run the exact same deployment command from your terminal:
 
 ```cmd
-gcloud run deploy nova-voice-console --source . --region us-central1 --allow-unauthenticated --timeout 3600 --memory 512Mi --set-secrets="GOOGLE_API_KEY=GOOGLE_API_KEY:latest,CONSOLE_TOKEN=CONSOLE_TOKEN:latest" --set-env-vars="NOVA_LIVE_MODEL=gemini-3.1-flash-live-preview"
+gcloud run deploy nova-voice-console --source . --region us-central1 --allow-unauthenticated --timeout 3600 --memory 512Mi --min-instances=0 --max-instances=2 --set-secrets="GOOGLE_API_KEY=GOOGLE_API_KEY:latest,CONSOLE_TOKEN=CONSOLE_TOKEN:latest,KARRIE_EMAIL=KARRIE_EMAIL:latest,ADMIN_EMAIL=ADMIN_EMAIL:latest,SENDER_EMAIL=SENDER_EMAIL:latest" --set-env-vars="NOVA_LIVE_MODEL=gemini-3.1-flash-live-preview"
 ```
 
 Cloud Run will automatically build a new version of your container and seamlessly shift all traffic to t
