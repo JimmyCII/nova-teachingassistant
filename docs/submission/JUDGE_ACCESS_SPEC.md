@@ -8,7 +8,7 @@ This spec outlines the exact safety gates implemented and the administrative che
 
 ## 1. Application-Level Safety Gates (Already Implemented)
 
-1. **Token-Gated URL:** The WebSocket connection string hardcodes a 32-byte `CONSOLE_TOKEN`. The UI reads this token from the URL fragment (e.g., `#token=mjvA11...`). If a judge opens the root domain without the token, or if someone finds the domain on a web scanner, they receive a `403 Forbidden` response and cannot access the Gemini Live API.
+1. **Token-Gated URL:** The WebSocket connection string hardcodes a 32-byte `CONSOLE_TOKEN`. The UI reads this token from the URL fragment (e.g., `#token=EXAMPLE_TOKEN_xxxx`). If a judge opens the root domain without the token, or if someone finds the domain on a web scanner, they receive a `403 Forbidden` response and cannot access the Gemini Live API.
 2. **Turn Limits (Anti-Flooding):** A single active WebSocket session is hard-capped via `MAX_TURNS_PER_SESSION=15`. If the user hits 15 continuous queries, the session is forcibly dropped and a Policy Violation error is thrown.
 3. **Admin Alerts:** If the rate limit is hit, the application automatically dispatches an alert email via the `comms_server` MCP to `[ADMIN_EMAIL]`, allowing you to instantly cycle the console token if active abuse is occurring.
 
