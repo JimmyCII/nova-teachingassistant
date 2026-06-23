@@ -7,7 +7,7 @@
 - 🎥 **Meet Nova (persona interview):** https://youtu.be/oTBeDFI9uh0
 - 🛠️ **Technical demo — Nova does the work:** https://youtu.be/ahygLV0LRl4 *(voice/UI request → live agent tool calls → Drive artifact + approval email)*
 - 🌐 **Live voice console (Cloud Run):** `nova-voice-console` (`us-central1`) — *[paste public URL]*
-- 💻 **Source:** *[paste GitHub repo URL]*
+- 💻 **Source:** https://github.com/JimmyCII/nova-teachingassistant
 
 ---
 
