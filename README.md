@@ -25,63 +25,66 @@ research lives in `docs/karrie_profile/` (local-only — see PII note).
 
 ## Status
 
-| | |
+| Component | Status |
 |---|---|
-| **Nova voice console** | ✅ `web/` — talk to Nova in the browser (Gemini Live API); arc-reactor orb, hands-free, mobile-first, speaker-aware, security-hardened. `python run_console.py` |
-| **TeacherMind data agent** | ✅ `agent/` — Gemini function-calling, 12 tools (grades/standards/Canvas/parent-comms), CLI |
-| **Persona** | ✅ `docs/karrie_profile/` (local-only) — Nova persona + system prompt; voice persona in `web/nova_voice_prompt.py` |
-| **Homework knowledge base** | ✅ `docs/karrie_profile/homework/` (local) — spiral style guide + exemplars + templates from 54 weekly files |
-| **Spiral homework generator** | ✅ **built & live-verified** (`feat/spiral-homework`) — Gemini spiral mix → editable `.xlsx` (Karrie's 4-col format) → Nova's Drive `Homework/<year>/Drafts`, shared with Karrie. 13 tests. `python -m agent.tools.spiral_homework …` |
-| **Key gaps** | ⚠ Nova not yet wired into the `agent/` tools (console talks, but can't use grade/homework tools yet); not deployed to Cloud; homework/DOK builders not built |
-| **Next session** | [`prompts/session-2-kickoff.md`](./prompts/session-2-kickoff.md) |
+| **Nova voice console** | ✅ `web/` — Talk to Nova in the browser (Gemini Live API); hands-free, mobile-first, deployed to **Cloud Run**. |
+| **TeacherMind data agent** | ✅ `agent/` — Gemini function-calling, 18 tools wired directly into the Voice Console. |
+| **Pedagogy Critic** | ✅ `agent/` — Evaluates generated content against AZ Math Standards and Webb DOK. |
+| **MCP Servers** | ✅ `mcp_servers/` — Curriculum MCP (Standards/DOK) & Comms MCP (Drive watcher/Email loop) running. |
+| **Content Generators** | ✅ **built & live-verified** — Generates spiral homework `.xlsx`, DOK activities, and 10-Q Quizzes, saving to Drive. |
+| **ADK Smoke Test** | ✅ `tests/test_adk_routing.py` — Verifies formal Google ADK orchestration capabilities. |
 
 ## Quick start
 
-**Talk to Nova (voice console):**
+### 1. Local Voice Console
 ```bash
 pip install -r requirements.txt
-# .env must hold GOOGLE_API_KEY (+ GOOGLE_CLOUD_PROJECT). See .env.example.
-python run_console.py          # → http://localhost:8000 — press Talk, allow the mic, say hi
 ```
-
-**TeacherMind data agent (CLI):**
+Create a `.env` file containing the following:
+```env
+GOOGLE_API_KEY="your_api_key"
+CONSOLE_TOKEN="your_secure_32_byte_token"
+KARRIE_EMAIL="target_teacher@email.com"
+ADMIN_EMAIL="admin_alert@email.com"
+SENDER_EMAIL="agent_sender@email.com"
+```
+Run the console locally:
 ```bash
-python run.py                  # or: python -m agent.agent
-# try: "Load sample_data/synergy_export_sample.csv — who's struggling in Period 2?"
+python run_console.py  # → http://localhost:8000
 ```
 
-**ADK Multi-Agent Orchestrator (Smoke Test):**
+### 2. Cloud Run Deployment
+The live demo is actively hosted on Google Cloud Run. To deploy your own instance, run the included deploy script (which configures the required scaling caps and pulls secrets from Google Secret Manager):
+```bash
+./deploy.sh
+```
+*(See `docs/runbook_deployment.md` for full GCP setup instructions).*
+
+### 3. ADK Multi-Agent Orchestrator (Smoke Test)
 Verify that the formal Google ADK framework correctly routes complex tasks to specialized Sub-Agents (Homework, DOK, Quizzes).
 ```bash
-python test_adk_routing.py     # Live Gemini routing test
+python tests/test_adk_routing.py
 ```
 
 ---
 
 ## Repository layout
 
-```
+```text
 .
-├── CAPSTONE_SPEC.md          # Canonical project spec (TeacherMind)
-├── README.md / AGENTS.md / CLAUDE.md / CODEX_BOOTSTRAP.md / DEPENDENCIES.md
-├── run.py                    # CLI entry (data agent)        run_console.py  # voice console entry
-├── requirements.txt
-├── web/                      # NOVA VOICE CONSOLE
-│   ├── server.py             #   FastAPI + WebSocket bridge to the Gemini Live API
-│   ├── nova_voice_prompt.py  #   Nova's spoken persona (PII-free)
-│   └── static/               #   index.html · styles.css · app.js  (arc-reactor orb console)
-├── agent/                    # TEACHERMIND DATA AGENT (ADK-style package; no src/)
-│   ├── agent.py              #   agentic loop + Gemini tool wiring + SYSTEM_PROMPT
-│   ├── tools/                #   grade_tools, standards_mapper, canvas_tools, communication_drafter
-│   └── data/                 #   az_math_6_standards.json, standard_keywords.json
+├── CAPSTONE_SPEC.md          # Canonical project spec
+├── README.md                 # Project Overview & Quick Start
+├── deploy.sh                 # Cloud Run deployment script
+├── web/                      # NOVA VOICE CONSOLE (FastAPI + WebSocket)
+├── agent/                    # TEACHERMIND DATA AGENTS (Tools & Sub-Agents)
+├── mcp_servers/              # FastMCP Servers (Curriculum & Comms)
 ├── sample_data/              # Synthetic Synergy CSV (no real PII)
-├── tests/                    # pytest (test_grade_tools.py)
-├── agents/{prompts,logs}/    # multi-agent role prompts; routing + decision logs
-├── prompts/                  # session prompts (session-1 record, session-2 kickoff)
+├── tests/                    # pytest & ADK smoke tests
 └── docs/
-    ├── requirements.md · ideas.md · research-voice-options.md
-    ├── superpowers/specs/    # design specs
-    └── karrie_profile/       # ⚠ LOCAL-ONLY persona research (gitignored — see below)
+    ├── architecture/         # Architectural decisions (ADK vs Voice)
+    ├── launch/               # Kaggle Writeup & Judging Safety Specs
+    ├── superpowers/specs/    # Design specs
+    └── karrie_profile/       # ⚠ LOCAL-ONLY persona research
 ```
 
 ---

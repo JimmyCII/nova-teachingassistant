@@ -55,7 +55,7 @@ Cloud Run builds our Docker container and hosts it securely on a public HTTPS UR
    Since you are on Windows, the easiest way is to run this single continuous command in your Command Prompt or PowerShell. It will package your code and upload it:
    
    ```cmd
-   gcloud run deploy nova-voice-console --source . --region us-central1 --allow-unauthenticated --timeout 3600 --memory 512Mi --min-instances=0 --max-instances=2 --set-secrets="GOOGLE_API_KEY=GOOGLE_API_KEY:latest,CONSOLE_TOKEN=CONSOLE_TOKEN:latest" --set-env-vars="NOVA_LIVE_MODEL=gemini-3.1-flash-live-preview,KARRIE_EMAIL=redacted@example.com,ADMIN_EMAIL=admin@example.com,SENDER_EMAIL=nova-assistant@example.com"
+   gcloud run deploy nova-voice-console --source . --region us-central1 --allow-unauthenticated --timeout 3600 --memory 512Mi --min-instances=0 --max-instances=2 --set-secrets="GOOGLE_API_KEY=GOOGLE_API_KEY:latest,CONSOLE_TOKEN=CONSOLE_TOKEN:latest,KARRIE_EMAIL=KARRIE_EMAIL:latest,ADMIN_EMAIL=ADMIN_EMAIL:latest,SENDER_EMAIL=SENDER_EMAIL:latest" --set-env-vars="NOVA_LIVE_MODEL=gemini-3.1-flash-live-preview"
    ```
 
 Once the command completes, Google Cloud will output a **Service URL** (e.g., `https://nova-voice-console-xxxx-uc.a.run.app`). You can open this URL on any web-enabled device to access the live Nova Voice Console!
