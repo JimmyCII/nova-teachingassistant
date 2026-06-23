@@ -1,0 +1,143 @@
+/* ============================================================
+   Nova Console — "Nova Core"  ·  mobile-first, fixed zones
+   ============================================================ */
+:root {
+  --plum-950:#160b1f; --plum-900:#1c0f28; --plum-800:#271637;
+  --deep-plum:#3A1F4B; --eggplant:#522D69; --amethyst:#8750A6;
+  --lavender:#DECCEA; --cream:#FFF6E5; --peach:#F7D4B0; --gold:#DDA440; --rose:#AE4E6C;
+  --ink:var(--cream);
+  --muted:color-mix(in oklab, var(--lavender) 70%, transparent);
+  --display:"Fraunces", Georgia, serif;
+  --body:"Hanken Grotesk", system-ui, sans-serif;
+  --hairline:color-mix(in oklab, var(--lavender) 22%, transparent);
+  --field:color-mix(in oklab, var(--plum-800) 70%, transparent);
+}
+* { box-sizing:border-box; }
+html, body { height:100%; margin:0; }
+body {
+  font-family:var(--body); color:var(--ink); overflow:hidden;
+  background:
+    radial-gradient(120% 80% at 50% 6%, color-mix(in oklab, var(--amethyst) 24%, transparent), transparent 60%),
+    radial-gradient(140% 120% at 50% 120%, color-mix(in oklab, var(--rose) 14%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--plum-900), var(--plum-950));
+  -webkit-font-smoothing:antialiased;
+}
+#starCanvas { position:fixed; inset:0; width:100%; height:100%; z-index:0; opacity:.85; }
+.vignette { position:fixed; inset:0; z-index:1; pointer-events:none;
+  background:radial-gradient(100% 70% at 50% 38%, transparent 55%, rgba(11,5,17,.7) 100%); }
+.grain { position:fixed; inset:-50%; z-index:1; pointer-events:none; opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 8s steps(6) infinite; }
+@keyframes grain { 0%{transform:translate(0,0)} 50%{transform:translate(-6%,4%)} 100%{transform:translate(3%,-5%)} }
+
+/* ---- app shell: fixed column, never scrolls the page ---- */
+.app {
+  position:relative; z-index:2;
+  height:100dvh; max-width:680px; margin:0 auto;
+  display:flex; flex-direction:column;
+  padding:max(.7rem, env(safe-area-inset-top)) clamp(.8rem,3.5vw,1.4rem)
+          max(.7rem, env(safe-area-inset-bottom));
+  gap:.6rem;
+}
+
+/* ---- topbar ---- */
+.topbar { flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; }
+.wordmark { display:flex; align-items:baseline; gap:.5rem; }
+.wordmark .spark { color:var(--gold); font-size:.9rem; transform:translateY(-2px);
+  filter:drop-shadow(0 0 8px color-mix(in oklab,var(--gold) 70%,transparent)); }
+.wordmark .name { font-family:var(--display); font-weight:600; letter-spacing:.24em;
+  font-size:clamp(1rem,4.5vw,1.3rem); text-shadow:0 0 20px color-mix(in oklab,var(--amethyst) 50%,transparent); }
+.wordmark .tag { font-family:var(--display); font-style:italic; color:var(--muted);
+  font-size:clamp(.72rem,3vw,.92rem); }
+.status { display:inline-flex; align-items:center; gap:.45rem; font-size:.66rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  padding:.36rem .66rem; border:1px solid var(--hairline); border-radius:999px;
+  background:color-mix(in oklab,var(--plum-800) 50%,transparent); backdrop-filter:blur(8px); }
+.status { transition:opacity .4s; }
+.status .dot { width:.48rem; height:.48rem; border-radius:50%;
+  background:color-mix(in oklab,var(--lavender) 55%,transparent);
+  box-shadow:0 0 8px color-mix(in oklab,var(--lavender) 45%,transparent);
+  transition:background .4s, box-shadow .4s; }
+body[data-state="listening"] .dot { background:var(--lavender); box-shadow:0 0 12px var(--lavender); }
+body[data-state="speaking"] .dot { background:var(--gold); box-shadow:0 0 14px var(--gold); }
+body[data-state="connecting"] .dot { background:var(--peach); animation:blink 1s infinite; }
+body[data-state="error"] .dot { background:var(--rose); box-shadow:0 0 10px var(--rose); }
+/* keep the chip subtle when not actively talking ("ready" should not shout) */
+body[data-state="idle"] .status, body[data-state="connected"] .status { opacity:.5; }
+@keyframes blink { 50%{opacity:.25} }
+
+/* ---- scene / orb (FIXED height -> never pushed) ---- */
+.scene { flex:0 0 auto; display:grid; place-items:center; gap:.5rem;
+  height:clamp(160px, 28dvh, 300px); margin-bottom:clamp(.4rem, 2.4vh, 1.1rem);
+  transition:height .5s cubic-bezier(.4,0,.2,1);
+  position:relative; z-index:10; pointer-events:none; }
+body[data-mode="talk"] .scene { height:clamp(220px, 42dvh, 420px); }
+/* orb fills the whole scene so its glow fades out long before any edge (no box) */
+.orb-wrap { position:relative; width:100%; height:100%; display:grid; place-items:center; }
+#orbCanvas { width:100%; height:100%; display:block; }
+/* onboarding hint lives INSIDE the transcript (centered), so nothing sits under the orb */
+.empty-hint { margin:auto; text-align:center; max-width:30ch; color:var(--muted);
+  font-family:var(--display); font-style:italic; line-height:1.45; font-size:clamp(.95rem,3.6vw,1.25rem);
+  border:0; background:none; backdrop-filter:none; animation:none; opacity:1; transform:none; }
+.empty-hint em { font-style:normal; color:var(--gold); }
+body.has-convo .empty-hint { display:none; }
+
+/* ---- transcript (the ONLY growing/scrolling region) ---- */
+.transcript { flex:1 1 auto; min-height:0; overflow-y:auto; list-style:none;
+  margin:0; padding:.1rem .1rem; display:flex; flex-direction:column; justify-content:flex-start; gap:.5rem;
+  scrollbar-width:thin; scrollbar-color:var(--eggplant) transparent;
+  position:relative; z-index:5;
+  /* fade out top so bubbles disappear behind the orb, and fade bottom near composer */
+  -webkit-mask-image:linear-gradient(180deg, transparent 0%, transparent 10%, #000 30%, #000 90%, transparent 100%);
+  mask-image:linear-gradient(180deg, transparent 0%, transparent 10%, #000 30%, #000 90%, transparent 100%); }
+.transcript::-webkit-scrollbar { width:6px; }
+.transcript::-webkit-scrollbar-thumb { background:var(--eggplant); border-radius:99px; }
+.turn { padding:.5rem .8rem; border-radius:14px; font-size:.92rem; line-height:1.45;
+  max-width:88%; opacity:0; transform:translateY(6px); animation:rise .4s ease forwards;
+  border:1px solid var(--hairline); backdrop-filter:blur(6px); word-wrap:break-word; }
+@keyframes rise { to { opacity:1; transform:none; } }
+.turn .who { display:block; font-size:.58rem; letter-spacing:.2em; text-transform:uppercase;
+  margin-bottom:.18rem; opacity:.85; }
+.turn.nova { align-self:flex-start; background:color-mix(in oklab,var(--eggplant) 42%,transparent); border-top-left-radius:4px; }
+.turn.nova .who { color:var(--gold); }
+.turn.karrie { align-self:flex-end; background:color-mix(in oklab,var(--deep-plum) 52%,transparent); border-top-right-radius:4px; }
+.turn.karrie .who { color:var(--lavender); }
+.turn.notice { align-self:center; text-align:center; max-width:92%; font-size:.82rem;
+  color:var(--muted); background:color-mix(in oklab,var(--plum-800) 50%,transparent); border-style:dashed; }
+
+/* ---- composer (fixed bottom bar) ---- */
+.composer { flex:0 0 auto; display:flex; align-items:center; gap:.5rem;
+  padding:.4rem; border-radius:999px; border:1px solid var(--hairline);
+  background:color-mix(in oklab,var(--plum-800) 62%,transparent); backdrop-filter:blur(10px); }
+.quick-actions { flex:0 0 auto; display:flex; align-items:center; justify-content:center; gap:.5rem; }
+.pill-btn { padding:.4rem .8rem; border-radius:999px; border:1px solid var(--hairline); background:color-mix(in oklab,var(--plum-800) 62%,transparent); color:var(--cream); font-family:var(--body); font-size:.85rem; cursor:pointer; backdrop-filter:blur(10px); transition:background .2s; }
+.pill-btn:hover { background:color-mix(in oklab,var(--eggplant) 60%,transparent); }
+.talk { display:inline-flex; align-items:center; gap:.4rem; cursor:pointer; border:0;
+  font-family:var(--body); font-weight:600; font-size:.9rem; color:var(--plum-950);
+  padding:.62rem 1rem; border-radius:999px; white-space:nowrap;
+  background:linear-gradient(135deg, var(--cream), var(--peach) 55%, var(--gold));
+  box-shadow:0 6px 18px color-mix(in oklab,var(--gold) 26%,transparent);
+  transition:transform .15s, box-shadow .3s, filter .3s; }
+.talk:active { transform:scale(.97); }
+.talk .talk-ic { font-size:.95rem; }
+body[data-mode="talk"] .talk { color:var(--cream);
+  background:linear-gradient(135deg, var(--rose), var(--eggplant));
+  box-shadow:0 0 0 1px var(--hairline) inset, 0 0 18px color-mix(in oklab,var(--rose) 50%,transparent);
+  animation:talkpulse 1.6s ease-in-out infinite; }
+@keyframes talkpulse { 50%{ box-shadow:0 0 0 1px var(--hairline) inset, 0 0 28px color-mix(in oklab,var(--rose) 70%,transparent);} }
+.text-input { flex:1 1 auto; min-width:0; border:0; background:transparent; color:var(--cream);
+  font-family:var(--body); font-size:1rem; padding:.5rem .2rem; outline:none; }
+.text-input::placeholder { color:color-mix(in oklab,var(--lavender) 55%,transparent); }
+.send { flex:0 0 auto; width:2.5rem; height:2.5rem; border-radius:50%; cursor:pointer; border:0;
+  color:var(--cream); font-size:1.05rem; display:grid; place-items:center;
+  background:color-mix(in oklab,var(--amethyst) 70%,transparent);
+  transition:transform .15s, filter .2s; }
+.send:hover { filter:brightness(1.1); } .send:active { transform:scale(.94); }
+
+@media (prefers-reduced-motion: reduce) {
+  .grain, .turn, .talk { animation:none; } .turn { opacity:1; transform:none; }
+}
+@media (max-width:420px) {
+  .wordmark .tag { display:none; }
+  .talk .talk-label { display:none; } .talk { padding:.62rem; }
+}

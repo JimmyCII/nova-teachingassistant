@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1" />
+  <title>Nova — your co-teacher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body data-state="idle" data-mode="idle">
+  <canvas id="starCanvas" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="wordmark">
+        <span class="spark" aria-hidden="true">✦</span>
+        <span class="name">NOVA</span>
+        <span class="tag">your co-teacher</span>
+      </div>
+      <div class="status" role="status">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="status-text" id="statusText">offline</span>
+      </div>
+    </header>
+
+    <section class="scene" aria-label="Nova">
+      <div class="orb-wrap">
+        <canvas id="orbCanvas" width="560" height="560" aria-hidden="true"></canvas>
+      </div>
+    </section>
+
+    <ol class="transcript" id="transcript" aria-label="Conversation">
+      <li class="empty-hint" id="emptyHint">Tap <em>Talk</em> and say hello —<br>or type a question below.</li>
+    </ol>
+
+    <div class="quick-actions" id="quickActions">
+      <button class="pill-btn" type="button" onclick="triggerQuickAction('Hey Nova, create homework')">
+        <span aria-hidden="true">📝</span> Create Homework
+      </button>
+      <button class="pill-btn" type="button" onclick="triggerQuickAction('Hey Nova, create small group activities using the DOK style')">
+        <span aria-hidden="true">👥</span> Group Activities
+      </button>
+      <button class="pill-btn" type="button" onclick="triggerQuickAction('Hey Nova, create a weekly quiz')">
+        <span aria-hidden="true">🎯</span> Create Quiz
+      </button>
+    </div>
+
+    <form class="composer" id="composer" autocomplete="off">
+      <button class="talk" id="talkBtn" type="button" aria-pressed="false">
+        <span class="talk-ic" aria-hidden="true">🎙</span>
+        <span class="talk-label" id="talkLabel">Talk</span>
+      </button>
+      <input class="text-input" id="textInput" type="text" inputmode="text"
+             placeholder="Type a question for Nova…" aria-label="Type a question" />
+      <button class="send" id="sendBtn" type="submit" aria-label="Send">
+        <span aria-hidden="true">➜</span>
+      </button>
+    </form>
+  </div>
+
+  <script>
+    function triggerQuickAction(text) {
+      document.getElementById('textInput').value = text;
+      document.getElementById('sendBtn').click();
+      if (document.getElementById('talkBtn').getAttribute('aria-pressed') !== 'true') {
+        document.getElementById('talkBtn').click();
+      }
+    }
+  </script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

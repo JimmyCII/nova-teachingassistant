@@ -1,0 +1,9 @@
+.git
+.gitignore
+__pycache__/
+*.pyc
+tests/
+
+# Keep OAuth credentials for the Cloud Run deployment ONLY
+!.nova_drive_token.json
+!client_secret.json

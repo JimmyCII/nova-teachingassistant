@@ -1,0 +1,69 @@
+{
+  "title": "Depth of Knowledge (DOK) Levels",
+  "source": "https://www.azed.gov/sites/default/files/2016/11/dok-levels.pdf",
+  "citation": "Webb, Norman L. and others. 'Web Alignment Tool' 24 July 2005. Wisconsin Center of Educational Research.",
+  "levels": {
+    "Level 1": {
+      "name": "Recall",
+      "verbs": [
+        "Arrange", "Calculate", "Define", "Draw", "Identify", "Illustrate", "Label", "List", "Match", 
+        "Measure", "Memorize", "Name", "Quote", "Recall", "Recite", "Recognize", "Repeat", "Report", 
+        "State", "Tabulate", "Tell", "Use", "Who, What, When, Where, Why"
+      ],
+      "activities": [
+        "Recall elements and details of story structure, such as sequence of events, character, plot and setting.",
+        "Conduct basic mathematical calculations.",
+        "Label locations on a map.",
+        "Represent in words or diagrams a scientific concept or relationship.",
+        "Perform routine procedures like measuring length or using punctuation marks correctly.",
+        "Describe the features of a place or people."
+      ]
+    },
+    "Level 2": {
+      "name": "Skill/Concept",
+      "verbs": [
+        "Categorize", "Cause/Effect", "Classify", "Collect and Display", "Compare", "Construct", 
+        "Distinguish", "Estimate", "Graph", "Identify Patterns", "Infer", "Interpret", "Make Observations", 
+        "Modify", "Organize", "Predict", "Relate", "Separate", "Show", "Summarize", "Use Context Cues"
+      ],
+      "activities": [
+        "Identify and summarize the major events in a narrative.",
+        "Use context cues to identify the meaning of unfamiliar words.",
+        "Solve routine multiple-step problems.",
+        "Describe the cause/effect of a particular event.",
+        "Identify patterns in events or behavior.",
+        "Formulate a routine problem given data and conditions.",
+        "Organize, represent and interpret data."
+      ]
+    },
+    "Level 3": {
+      "name": "Strategic Thinking",
+      "verbs": [
+        "Apprise", "Assess", "Cite Evidence", "Compare", "Construct", "Critique", "Develop a Logical Argument", 
+        "Differentiate", "Draw Conclusions", "Explain Phenomena in Terms of Concepts", "Formulate", 
+        "Hypothesize", "Investigate", "Revise", "Use Concepts to Solve Non-Routine Problems"
+      ],
+      "activities": [
+        "Support ideas with details and examples.",
+        "Use voice appropriate to the purpose and audience.",
+        "Identify research questions and design investigations for a scientific problem.",
+        "Develop a scientific model for a complex situation.",
+        "Determine the author’s purpose and describe how it affects the interpretation of a reading selection.",
+        "Apply a concept in other contexts."
+      ]
+    },
+    "Level 4": {
+      "name": "Extended Thinking",
+      "verbs": [
+        "Apply Concepts", "Analyze", "Connect", "Create", "Critique", "Design", "Prove", "Synthesize"
+      ],
+      "activities": [
+        "Conduct a project that requires specifying a problem, designing and conducting an experiment, analyzing its data, and reporting results/solutions.",
+        "Apply mathematical model to illuminate a problem or situation.",
+        "Analyze and synthesize information from multiple sources.",
+        "Describe and illustrate how common themes are found across texts from different cultures.",
+        "Design a mathematical model to inform and solve a practical or abstract situation."
+      ]
+    }
+  }
+}

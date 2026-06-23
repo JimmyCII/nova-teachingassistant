@@ -1,0 +1,56 @@
+# ============================================================================
+#  FERPA / PII GUARD — Karrie-derived private research is LOCAL-ONLY.
+#  These files contain references to real student-name filenames, IEP/SPED/SEI
+#  paths, and family detail. They MUST NOT be committed until fully PII-scrubbed.
+#  See README "Data & PII handling" and prompts/session-1-kickoff.md.
+# ============================================================================
+docs/karrie_profile/
+docs/karrie_profile.md
+docs/karrie_exploration_prompt.md
+**/file_inventory_raw.csv
+*_raw.csv
+/data/
+/private/
+
+# Secrets & local config
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+key.txt
+key*.txt
+*secret*.txt
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+
+# Build / cache / logs
+dist/
+build/
+*.log
+.cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Spiral homework generator — local secrets & output
+client_secret.json
+.nova_drive_token.json
+/generated/
+
+# any OAuth client-secret variant (security)
+client_secret*.json
+*.apps.googleusercontent.com.json

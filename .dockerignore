@@ -1,0 +1,10 @@
+.git/
+.gitignore
+.gemini/
+.env
+docs/karrie_profile/
+__pycache__/
+*.pyc
+tests/
+scratch/
+artifacts/

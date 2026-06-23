@@ -1,0 +1,32 @@
+{
+  "keyword_map": {
+    "6.RP.A.1": ["ratio", "ratios", "ratio language", "ratio relationship"],
+    "6.RP.A.2": ["unit rate", "unit price", "rate", "per unit"],
+    "6.RP.A.3": ["ratio reasoning", "equivalent ratio", "percent", "proportion", "measurement conversion", "unit conversion"],
+    "6.NS.A.1": ["fraction division", "divide fractions", "dividing fractions", "quotient of fractions"],
+    "6.NS.B.2": ["multi-digit division", "long division", "division algorithm"],
+    "6.NS.B.3": ["decimal", "decimals", "add decimals", "subtract decimals", "multiply decimals", "divide decimals"],
+    "6.NS.B.4": ["GCF", "LCM", "greatest common factor", "least common multiple", "distributive property", "factor"],
+    "6.NS.C.5": ["negative numbers", "positive and negative", "opposite", "integers"],
+    "6.NS.C.6": ["number line", "coordinate plane", "negative coordinates", "rational number"],
+    "6.NS.C.7": ["absolute value", "ordering", "compare rational", "inequality rational"],
+    "6.NS.C.8": ["coordinate plane", "quadrant", "graphing points", "four quadrants", "plot points"],
+    "6.EE.A.1": ["exponent", "exponents", "powers", "squared", "cubed", "numerical expressions"],
+    "6.EE.A.2": ["variable", "variables", "algebraic expression", "evaluate expression", "coefficient", "term"],
+    "6.EE.A.3": ["equivalent expression", "properties of operations", "distributive", "combine like terms"],
+    "6.EE.B.5": ["equation", "solution", "solve equation", "inequality solution"],
+    "6.EE.B.6": ["write equation", "represent", "variable expression"],
+    "6.EE.B.7": ["one-step equation", "solve for x", "px = q", "x + p = q"],
+    "6.EE.B.8": ["inequality", "greater than", "less than", "x > c", "x < c"],
+    "6.EE.C.9": ["dependent variable", "independent variable", "relationship", "table of values"],
+    "6.G.A.1": ["area", "triangle", "quadrilateral", "polygon", "decompose"],
+    "6.G.A.2": ["volume", "rectangular prism", "fractional edge"],
+    "6.G.A.3": ["coordinate plane polygon", "perimeter", "area coordinate"],
+    "6.G.A.4": ["net", "surface area", "three-dimensional", "3D figure"],
+    "6.SP.A.1": ["statistical question", "variability", "data question"],
+    "6.SP.A.2": ["distribution", "center", "spread", "shape of data"],
+    "6.SP.A.3": ["measure of center", "mean", "median", "measure of variation"],
+    "6.SP.B.4": ["dot plot", "histogram", "box plot", "number line plot", "data display"],
+    "6.SP.B.5": ["summarize data", "interquartile range", "IQR", "mean absolute deviation", "MAD"]
+  }
+}

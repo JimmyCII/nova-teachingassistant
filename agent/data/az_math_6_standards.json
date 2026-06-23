@@ -1,0 +1,151 @@
+{
+  "grade": 6,
+  "state": "Arizona",
+  "adopted": "December 2016",
+  "updated": "2025",
+  "source": "https://www.azed.gov/standards-practices/k-12standards/mathematics-standards",
+  "ade_instruction_guidance": "70% of instructional time on Major Clusters",
+  "domains": [
+    {
+      "code": "6.RP",
+      "name": "Ratios and Proportional Relationships",
+      "priority": "major",
+      "clusters": [
+        {
+          "cluster": "6.RP.A",
+          "description": "Understand ratio concepts and use ratio reasoning to solve problems",
+          "standards": [
+            {"code": "6.RP.A.1", "description": "Understand the concept of a ratio and use ratio language to describe a ratio relationship between two quantities"},
+            {"code": "6.RP.A.2", "description": "Understand the concept of a unit rate a/b associated with a ratio a:b with b ≠ 0"},
+            {"code": "6.RP.A.3", "description": "Use ratio and rate reasoning to solve real-world and mathematical problems",
+             "sub": [
+               {"code": "6.RP.A.3a", "description": "Make tables of equivalent ratios, find missing values, plot pairs on a coordinate plane"},
+               {"code": "6.RP.A.3b", "description": "Solve unit rate problems including unit pricing and constant speed"},
+               {"code": "6.RP.A.3c", "description": "Find a percent of a quantity; solve problems involving finding the whole given a part and percent"},
+               {"code": "6.RP.A.3d", "description": "Use ratio reasoning to convert measurement units"}
+             ]}
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.NS",
+      "name": "The Number System",
+      "priority": "major",
+      "clusters": [
+        {
+          "cluster": "6.NS.A",
+          "description": "Apply and extend previous understandings of multiplication and division to divide fractions by fractions",
+          "standards": [
+            {"code": "6.NS.A.1", "description": "Interpret and compute quotients of fractions; solve word problems involving division of fractions by fractions"}
+          ]
+        },
+        {
+          "cluster": "6.NS.B",
+          "description": "Compute fluently with multi-digit numbers and find common factors and multiples",
+          "standards": [
+            {"code": "6.NS.B.2", "description": "Fluently divide multi-digit numbers using the standard algorithm"},
+            {"code": "6.NS.B.3", "description": "Fluently add, subtract, multiply, and divide multi-digit decimals using the standard algorithm"},
+            {"code": "6.NS.B.4", "description": "Find GCF of two whole numbers ≤ 100 and LCM of two whole numbers ≤ 12; use the distributive property to express a sum with a common factor"}
+          ]
+        },
+        {
+          "cluster": "6.NS.C",
+          "description": "Apply and extend previous understandings of numbers to the system of rational numbers",
+          "standards": [
+            {"code": "6.NS.C.5", "description": "Understand that positive and negative numbers describe quantities having opposite directions or values"},
+            {"code": "6.NS.C.6", "description": "Understand a rational number as a point on the number line; extend to coordinate axes with negative coordinates"},
+            {"code": "6.NS.C.7", "description": "Understand ordering and absolute value of rational numbers"},
+            {"code": "6.NS.C.8", "description": "Solve real-world problems by graphing points in all four quadrants of the coordinate plane"}
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.EE",
+      "name": "Expressions and Equations",
+      "priority": "major",
+      "clusters": [
+        {
+          "cluster": "6.EE.A",
+          "description": "Apply and extend previous understandings of arithmetic to algebraic expressions",
+          "standards": [
+            {"code": "6.EE.A.1", "description": "Write and evaluate numerical expressions involving whole-number exponents"},
+            {"code": "6.EE.A.2", "description": "Write, read, and evaluate expressions in which letters stand for numbers",
+             "sub": [
+               {"code": "6.EE.A.2a", "description": "Write expressions that record operations with numbers and variables"},
+               {"code": "6.EE.A.2b", "description": "Identify parts of an expression using mathematical terms (sum, term, product, factor, quotient, coefficient)"},
+               {"code": "6.EE.A.2c", "description": "Evaluate expressions at specific values of their variables"}
+             ]},
+            {"code": "6.EE.A.3", "description": "Apply the properties of operations to generate equivalent expressions"},
+            {"code": "6.EE.A.4", "description": "Identify when two expressions are equivalent"}
+          ]
+        },
+        {
+          "cluster": "6.EE.B",
+          "description": "Reason about and solve one-variable equations and inequalities",
+          "standards": [
+            {"code": "6.EE.B.5", "description": "Understand solving an equation or inequality as a process of answering: which values make it true?"},
+            {"code": "6.EE.B.6", "description": "Use variables to represent numbers and write an expression when solving a real-world or mathematical problem"},
+            {"code": "6.EE.B.7", "description": "Solve real-world and mathematical problems by writing and solving equations of the form x + p = q and px = q"},
+            {"code": "6.EE.B.8", "description": "Write an inequality of the form x > c or x < c to represent a constraint or condition"}
+          ]
+        },
+        {
+          "cluster": "6.EE.C",
+          "description": "Represent and analyze quantitative relationships between dependent and independent variables",
+          "standards": [
+            {"code": "6.EE.C.9", "description": "Use variables to represent two quantities in a real-world problem that change in relationship to one another"}
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.G",
+      "name": "Geometry",
+      "priority": "supporting",
+      "clusters": [
+        {
+          "cluster": "6.G.A",
+          "description": "Solve real-world and mathematical problems involving area, surface area, and volume",
+          "standards": [
+            {"code": "6.G.A.1", "description": "Find the area of right triangles, other triangles, special quadrilaterals, and polygons by composing into rectangles or decomposing into triangles"},
+            {"code": "6.G.A.2", "description": "Find the volume of a right rectangular prism with fractional edge lengths"},
+            {"code": "6.G.A.3", "description": "Draw polygons in the coordinate plane given coordinates for the vertices; find perimeter and area"},
+            {"code": "6.G.A.4", "description": "Represent three-dimensional figures using nets; use nets to find surface area"}
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6.SP",
+      "name": "Statistics and Probability",
+      "priority": "additional",
+      "clusters": [
+        {
+          "cluster": "6.SP.A",
+          "description": "Develop understanding of statistical variability",
+          "standards": [
+            {"code": "6.SP.A.1", "description": "Recognize a statistical question as one that anticipates variability in the data"},
+            {"code": "6.SP.A.2", "description": "Understand that a set of data has a distribution described by its center, spread, and overall shape"},
+            {"code": "6.SP.A.3", "description": "Recognize that a measure of center summarizes data with a single number; a measure of variation describes how values vary"}
+          ]
+        },
+        {
+          "cluster": "6.SP.B",
+          "description": "Summarize and describe distributions",
+          "standards": [
+            {"code": "6.SP.B.4", "description": "Display numerical data in plots on a number line, including dot plots, histograms, and box plots"},
+            {"code": "6.SP.B.5", "description": "Summarize numerical data sets in relation to their context",
+             "sub": [
+               {"code": "6.SP.B.5a", "description": "Report number of observations"},
+               {"code": "6.SP.B.5b", "description": "Describe nature of attribute under investigation"},
+               {"code": "6.SP.B.5c", "description": "Give quantitative measures of center (median/mean) and variability (IQR/MAD)"},
+               {"code": "6.SP.B.5d", "description": "Relate the choice of measures of center and variability to the shape of the data distribution"}
+             ]}
+          ]
+        }
+      ]
+    }
+  ]
+}
