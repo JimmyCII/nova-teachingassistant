@@ -6,6 +6,7 @@ cold start, on any device.
 """
 from datetime import date
 
+from agent.tools.memory_store import format_memories_briefing
 from agent.tools.request_logger import get_recent_requests
 
 
@@ -16,6 +17,12 @@ def build_briefing() -> str:
         parts.append(get_recent_requests(limit=8))
     except Exception as exc:  # a briefing must never block a session
         parts.append(f"(Recent request log unavailable right now: {exc})")
+    try:
+        facts = format_memories_briefing()
+        if facts:
+            parts.append(facts)
+    except Exception as exc:
+        parts.append(f"(Saved facts unavailable right now: {exc})")
     return (
         "\n\n## Session briefing (auto-generated when this conversation connected)\n"
         "Use this to pick up where you and Karrie left off — reference it naturally "

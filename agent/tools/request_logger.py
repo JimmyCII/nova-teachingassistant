@@ -13,7 +13,7 @@ from pathlib import Path
 
 LOG_DIR = Path("docs/00_Inbox_from_Karrie")
 LOG_FILE = LOG_DIR / "Nova_Request_Log.csv"
-FIELDNAMES = ["Task_ID", "Date", "Topic", "Standard_Code", "Status", "File_ID"]
+FIELDNAMES = ["Task_ID", "Date", "Topic", "Standard_Code", "Status", "File_ID", "Requested_By"]
 FIRESTORE_COLLECTION = "nova_request_log"
 
 
@@ -113,7 +113,8 @@ def _reset_backend():
     _BACKEND = None
 
 
-def log_nova_task(topic: str, standard_code: str, status: str = "Open", file_id: str = "") -> str:
+def log_nova_task(topic: str, standard_code: str, status: str = "Open", file_id: str = "",
+                  requested_by: str = "") -> str:
     """Log a new request/task into the Nova Request Log. Returns the generated Task_ID."""
     task_id = str(uuid.uuid4())[:8]
     _backend().add({
@@ -123,6 +124,7 @@ def log_nova_task(topic: str, standard_code: str, status: str = "Open", file_id:
         "Standard_Code": standard_code,
         "Status": status,
         "File_ID": file_id,
+        "Requested_By": (requested_by or "").strip(),
     })
     return f"Task logged successfully. Task_ID: {task_id}"
 
@@ -141,7 +143,8 @@ def get_recent_requests(limit: int = 5) -> str:
         return "The request log is currently empty. No recent topics."
     lines = ["Recent requests:"]
     for r in rows:
-        lines.append(f"- Task {r['Task_ID']}: Topic '{r['Topic']}' (Standard: {r['Standard_Code']}), Status: {r['Status']} ({r.get('Date', '')})")
+        by = f", requested by {r['Requested_By']}" if r.get("Requested_By") else ""
+        lines.append(f"- Task {r['Task_ID']}: Topic '{r['Topic']}' (Standard: {r['Standard_Code']}), Status: {r['Status']}{by} ({r.get('Date', '')})")
     return "\n".join(lines)
 
 

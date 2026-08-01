@@ -18,6 +18,7 @@ from agent.tools import (
 )
 from agent.tools.spiral_homework.__main__ import generate_spiral_homework
 from agent.tools.request_logger import log_nova_task, update_task_status, get_recent_requests
+from agent.tools.memory_store import save_memory, forget_memory
 from agent.tools.weekly_quiz import generate_weekly_quiz
 from agent.tools.group_activities import generate_dok_activity
 from agent.tools.comms_tools import check_pending_approvals
@@ -42,6 +43,8 @@ VOICE_TOOL_REGISTRY = {
     "generate_weekly_quiz": generate_weekly_quiz,
     "generate_dok_activity": generate_dok_activity,
     "check_pending_approvals": check_pending_approvals,
+    "save_memory": save_memory,
+    "forget_memory": forget_memory,
 }
 
 _SCHEMA_DEFS = [
@@ -212,6 +215,7 @@ _SCHEMA_DEFS = [
                 "topic": {"type": "string", "description": "Plain language topic requested."},
                 "standard_code": {"type": "string", "description": "Mapped AZ standard code."},
                 "status": {"type": "string", "description": "Status, should default to 'Open'."},
+                "requested_by": {"type": "string", "description": "Who asked for this, when known (e.g., 'Karrie', 'Jim'). Omit if the speaker hasn't identified themselves."},
             },
             "required": ["topic", "standard_code"],
         },
@@ -260,6 +264,30 @@ _SCHEMA_DEFS = [
                 "topic": {"type": "string", "description": "Topic of the activity."},
             },
             "required": ["standard", "topic"],
+        },
+    },
+    {
+        "name": "save_memory",
+        "description": "Permanently remember a fact someone explicitly asks you to remember (preferences, schedules, classroom details, personal context). Saved facts appear in your briefing every session.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "fact": {"type": "string", "description": "The fact to remember, phrased concisely and durably (e.g., 'Karrie does spiral review on Thursdays')."},
+                "category": {"type": "string", "description": "One of: preference, schedule, classroom, personal, other."},
+                "person": {"type": "string", "description": "Who the fact is about or who asked, when known (e.g., 'Karrie', 'Jim')."},
+            },
+            "required": ["fact"],
+        },
+    },
+    {
+        "name": "forget_memory",
+        "description": "Delete a previously saved fact when asked to forget or correct it. Matches facts containing the given words.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "fact_hint": {"type": "string", "description": "A few distinctive words from the fact to forget (e.g., 'spiral review Thursdays')."}
+            },
+            "required": ["fact_hint"],
         },
     },
     {
