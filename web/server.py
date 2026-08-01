@@ -26,6 +26,7 @@ from fastapi.staticfiles import StaticFiles
 from google import genai
 from google.genai import types
 
+from .briefing import build_briefing
 from .nova_voice_prompt import NOVA_VOICE_PROMPT
 from agent.voice_tools import VOICE_TOOLS_API, execute_voice_tool
 from mcp_servers.comms_server.server import send_admin_alert_email
@@ -79,9 +80,15 @@ _client = genai.Client(api_key=API_KEY) if API_KEY else None
 
 
 def _live_config() -> types.LiveConnectConfig:
+    # Fresh briefing per connection (Tier-2 memory); never let it block a session.
+    system_prompt = NOVA_VOICE_PROMPT
+    try:
+        system_prompt += build_briefing()
+    except Exception as exc:
+        print(f"[Briefing] skipped: {exc}")
     return types.LiveConnectConfig(
         response_modalities=["AUDIO"],
-        system_instruction=NOVA_VOICE_PROMPT,
+        system_instruction=system_prompt,
         speech_config=types.SpeechConfig(
             voice_config=types.VoiceConfig(
                 prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name=NOVA_VOICE)
@@ -127,7 +134,8 @@ async def ws_endpoint(ws: WebSocket) -> None:
     turn_count = [0]  # List used to allow mutation inside inner function
 
     try:
-        async with _client.aio.live.connect(model=LIVE_MODEL, config=_live_config()) as session:
+        live_config = await asyncio.to_thread(_live_config)  # briefing does I/O; keep it off the event loop
+        async with _client.aio.live.connect(model=LIVE_MODEL, config=live_config) as session:
             await ws.send_text(json.dumps({"type": "status", "state": "connected",
                                            "voice": NOVA_VOICE}))
 
