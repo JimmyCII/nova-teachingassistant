@@ -79,9 +79,25 @@ class GoogleDriveClient:
             pass  # already shared / non-fatal
 
 def _get_creds():
+    import json
     from google.oauth2.credentials import Credentials
     from google_auth_oauthlib.flow import InstalledAppFlow
     from google.auth.transport.requests import Request
+
+    # Cloud Run: token JSON injected from Secret Manager (no browser available there,
+    # and credentials must never be baked into the container image).
+    token_json = os.getenv("NOVA_DRIVE_TOKEN_JSON", "").strip()
+    if token_json:
+        creds = Credentials.from_authorized_user_info(json.loads(token_json), SCOPES)
+        if not creds.valid:
+            if not creds.refresh_token:
+                raise RuntimeError(
+                    "NOVA_DRIVE_TOKEN_JSON has no refresh token — re-mint the token "
+                    "locally and update the Secret Manager version.")
+            creds.refresh(Request())
+        return creds
+
+    # Local dev: token file, minting via browser consent when missing or dead.
     creds = None
     if os.path.exists(TOKEN_PATH):
         creds = Credentials.from_authorized_user_file(TOKEN_PATH, SCOPES)

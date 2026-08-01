@@ -8,3 +8,7 @@ __pycache__/
 tests/
 scratch/
 artifacts/
+
+# OAuth credentials must never be baked into the image (serve via Secret Manager)
+.nova_drive_token.json
+client_secret.json

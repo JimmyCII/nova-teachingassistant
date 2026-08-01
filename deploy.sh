@@ -37,7 +37,7 @@ gcloud run deploy nova-voice-console \
     --memory 512Mi \
     --min-instances 0 \
     --max-instances 2 \
-    --set-secrets="GOOGLE_API_KEY=GOOGLE_API_KEY:latest,CONSOLE_TOKEN=CONSOLE_TOKEN:latest,KARRIE_EMAIL=KARRIE_EMAIL:latest,ADMIN_EMAIL=ADMIN_EMAIL:latest,SENDER_EMAIL=SENDER_EMAIL:latest" \
+    --set-secrets="GOOGLE_API_KEY=GOOGLE_API_KEY:latest,CONSOLE_TOKEN=CONSOLE_TOKEN:latest,KARRIE_EMAIL=KARRIE_EMAIL:latest,ADMIN_EMAIL=ADMIN_EMAIL:latest,SENDER_EMAIL=SENDER_EMAIL:latest,NOVA_DRIVE_TOKEN_JSON=NOVA_DRIVE_TOKEN_JSON:latest" \
     --set-env-vars="NOVA_LIVE_MODEL=gemini-3.1-flash-live-preview"
 
 echo "Deployment complete!"
