@@ -1,5 +1,15 @@
 # Next Session Kickoff — Nova Memory Layer (after 2026-08-01)
 
+> **UPDATE (same day, second session): Tiers 1 + 2 are DONE and verified in prod**
+> (revision 00016-7dc). Request log lives in Firestore (`nova_request_log`); a
+> session-start briefing is injected per WebSocket connect; cold-start recall
+> confirmed against a fresh prod revision. Remaining for a future session:
+> **Tier 3** (session-end summaries → `memories` collection) and **Tier 4**
+> (`save_memory` profile tool) from the 07-31 spec — that's the "Nova, remember
+> that I do spiral review on Thursdays" layer. Local dev note: Firestore uses
+> ADC (`gcloud auth application-default login`) + `GOOGLE_CLOUD_PROJECT` in `.env`;
+> tests force the CSV backend via `tests/conftest.py`.
+
 ## Kickoff prompt (paste this to start the session)
 
 > Nova's homework pipeline is fixed and verified in prod (see
