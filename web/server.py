@@ -15,6 +15,7 @@ import contextlib
 import hmac
 import json
 import os
+import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -31,6 +32,12 @@ from mcp_servers.comms_server.server import send_admin_alert_email
 
 load_dotenv()
 
+# Windows consoles default to cp1252, where the emoji in the [Orchestrator] prints raise
+# UnicodeEncodeError and kill the session coroutine at the FIRST tool call.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
 API_KEY = os.getenv("GOOGLE_API_KEY", "").strip()
 # Live model + voice are configurable because the live model is a preview that changes.
 LIVE_MODEL = os.getenv("NOVA_LIVE_MODEL", "gemini-3.1-flash-live-preview").strip()
@@ -44,7 +51,7 @@ ALLOWED_ORIGINS = {o.strip() for o in os.getenv("CONSOLE_ALLOWED_ORIGINS", "").s
 # Admin email for security alerts (e.g. rate limit exceeded)
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "admin@example.com").strip()
 # Max number of queries a single session can make before getting disconnected.
-MAX_TURNS_PER_SESSION = int(os.getenv("MAX_TURNS_PER_SESSION", "15"))
+MAX_TURNS_PER_SESSION = int(os.getenv("MAX_TURNS_PER_SESSION", "40"))
 
 
 def _origin_allowed(ws: "WebSocket") -> bool:

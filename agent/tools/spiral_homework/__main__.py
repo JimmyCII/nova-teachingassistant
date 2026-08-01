@@ -2,9 +2,27 @@
 from __future__ import annotations
 import argparse
 import os
+from datetime import date
 from pathlib import Path
 from .generator import generate_week_spec
 from .renderer import render_xlsx
+
+# Safe spiral-review fallback when the request log has no history yet:
+# computation fluency (multi-digit division, decimal operations).
+DEFAULT_REVIEW_STANDARDS = ["6.NS.B.2", "6.NS.B.3"]
+
+def _default_school_year(today=None) -> str:
+    today = today or date.today()
+    start = today.year if today.month >= 7 else today.year - 1
+    return f"{start}-{start + 1}"
+
+def _auto_review_standards(current_standards) -> list:
+    from agent.tools.request_logger import get_recent_standard_codes
+    current = set(current_standards or [])
+    picks = [c for c in get_recent_standard_codes() if c not in current][:2]
+    if picks:
+        return picks
+    return [c for c in DEFAULT_REVIEW_STANDARDS if c not in current] or DEFAULT_REVIEW_STANDARDS
 
 def _default_upload(local_path, school_year, status="Drafts", share_with=None):
     from .drive_store import GoogleDriveClient, upload_homework
@@ -12,9 +30,15 @@ def _default_upload(local_path, school_year, status="Drafts", share_with=None):
                            status=status,
                            share_with=share_with or (os.getenv("KARRIE_EMAIL") or None))
 
-def generate_spiral_homework(current_topic, current_standards, review_standards, due_date,
-                             school_year, track="regular", upload=True, out_dir="generated",
+def generate_spiral_homework(current_topic, current_standards, review_standards=None, due_date=None,
+                             school_year=None, track="regular", upload=True, out_dir="generated",
                              _generate=generate_week_spec, _upload=_default_upload) -> dict:
+    if not due_date:
+        raise ValueError("due_date is required (plain language like 'Friday' is fine).")
+    if not review_standards:
+        review_standards = _auto_review_standards(current_standards)
+    if not school_year:
+        school_year = _default_school_year()
     week = _generate(current_topic, current_standards, review_standards, due_date, track=track)
     safe_due = due_date.replace("/", "-")
     out_path = Path(out_dir) / f"{safe_due} spiral ({track}).xlsx"
@@ -49,7 +73,7 @@ def main(argv=None):
     p.add_argument("--standards", default="", help="current standard codes, comma-separated")
     p.add_argument("--review", default="", help="review standard codes, comma-separated")
     p.add_argument("--due", required=True, help="header label, e.g. 9/12")
-    p.add_argument("--year", required=True, help="school year folder, e.g. 2025-2026")
+    p.add_argument("--year", default=None, help="school year folder, e.g. 2025-2026 (default: current school year)")
     p.add_argument("--track", choices=["regular", "accelerated", "both"], default="regular")
     p.add_argument("--no-upload", action="store_true")
     p.add_argument("--out-dir", default="generated")

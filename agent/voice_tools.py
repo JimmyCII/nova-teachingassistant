@@ -195,12 +195,12 @@ _SCHEMA_DEFS = [
             "properties": {
                 "current_topic": {"type": "string", "description": "Topic currently being taught."},
                 "current_standards": {"type": "array", "items": {"type": "string"}, "description": "List of current AZ standard codes."},
-                "review_standards": {"type": "array", "items": {"type": "string"}, "description": "List of review standard codes."},
-                "due_date": {"type": "string", "description": "Due date label for the top of the homework sheet (e.g., '10/24')."},
-                "school_year": {"type": "string", "description": "School year folder for Google Drive (e.g., '2025-2026')."},
+                "review_standards": {"type": "array", "items": {"type": "string"}, "description": "Optional review standard codes. Omit to auto-select from recently logged standards."},
+                "due_date": {"type": "string", "description": "Due date label for the top of the homework sheet — plain language is fine (e.g., 'Friday August 7th' or '10/24')."},
+                "school_year": {"type": "string", "description": "Optional school year folder for Google Drive (e.g., '2025-2026'). Omit to default to the current school year."},
                 "track": {"type": "string", "description": "Track: 'regular' or 'accelerated'."},
             },
-            "required": ["current_topic", "current_standards", "review_standards", "due_date", "school_year"],
+            "required": ["current_topic", "current_standards", "due_date"],
         },
     },
     {

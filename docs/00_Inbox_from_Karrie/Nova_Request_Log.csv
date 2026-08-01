@@ -1,22 +1,7 @@
-Task_ID,Date,Topic,Standard_Code,Status
-00ee068d,2026-06-21 10:07:56,decimals homework,6.NS.B.3,Open
-a9af5499,2026-06-21 10:15:12,small group activities for dividing decimals,TBD,Open
-a040d09c,2026-06-21 14:48:21,Week 4 Fractions Quiz,6.NS.B.3,Open
-d01d98cb,2026-06-21 15:55:24,End to End Approval Test,6.EE.A.1,Pending Approval,1gKft7C_MqBZAGR7rmzInoWs5dlYVCjJm
-9c6fbbae,2026-06-21 16:05:37,End to End Approval Test,6.EE.A.1,Pending Approval,14_QMYN2YAX2juXIpgoQBP2KPqfYpnxby
-316c0671,2026-06-21 16:27:55,End to End Approval Test,6.EE.A.1,Pending Approval,1TmjLZBbicQ8rEIeIUSNO48qbGi6Vl639
-f509be0c,2026-06-21 16:36:32,"division homework, quiz, and group activity",6.NS.B.2,Open,
-dd6ed6b2,2026-06-21 16:38:11,Week 4 Division Quiz,6.NS.B.2,Pending Approval,1864FGdd4q7Cos8ndRkK-SggKi2A2rD68
-d222134a,2026-06-21 16:46:00,Fractions (regular),6.NS.A.1,Pending Approval,fake_id
-a6d4f79d,2026-06-21 17:14:16,Fractions,6.NS.A.1,Pending Approval,1-nEpxu2WMhCnFnsYS1hkCqIsNZThw96B
-9a895252,2026-06-21 17:29:18,Fractions,6.NS.A.1,Pending Approval,1InG9RjBwXubAoBud-krlMZL7gKQLzdDU
-47c02e7f,2026-06-21 17:54:01,Division Homework,6.NS.B.2,Open,
-ef863a0b,2026-06-21 17:54:53,Division (regular),6.NS.B.2,Pending Approval,1IdDhkEZfbdITpprWbjCAyxqZBhg9_Ydg
-1bb13d7a,2026-06-21 18:02:07,Ratios (regular),6.RP.A.1,Pending Approval,13VSIkhPaSGmpJTAjNv4LYfMsjvN1G1lW
-712c6256,2026-06-21 18:08:42,ratios (regular),6.RP.A.3,Pending Approval,1aBiZIHTyuI6TZW9EJlbVUsPhIc7WuRYq
-b2ecf8ad,2026-06-21 18:20:24,Dividing fractions by fractions,6.NS.A.1,Open,
-9a13bb74,2026-06-21 18:29:26,division,6.NS.B.2,Open,
-ce5a412c,2026-06-21 18:30:11,division,6.NS.B.2,Pending Approval,1SJiyrDcSBuE2XVmn1Xfn1tUI0M4iK5l0
-09ff192b,2026-06-21 18:30:35,division (regular),6.NS.B.2,Pending Approval,1DswgMtih8Du1OOyORwoUM2qTdDpLa5F7
-862f6ab4,2026-06-21 18:31:17,Week 1 Division Quiz,6.NS.B.2,Pending Approval,1Lkn7T0l2OrMIrnAhF7z2qVcY-OAmIO9W
-aa5d13cc,2026-06-22 16:45:42,Fractions,6.NS.A.1,Pending Approval,1oQSDtTL90oIf_VPiOHv5U3DTl_Rar3y7
+Task_ID,Date,Topic,Standard_Code,Status,File_ID
+00ee068d,2026-06-21 10:07:56,decimals homework,6.NS.B.3,Open,
+a9af5499,2026-06-21 10:15:12,small group activities for dividing decimals,TBD,Open,
+a040d09c,2026-06-21 14:48:21,Week 4 Fractions Quiz,6.NS.B.3,Open,
+7ec91e27,2026-08-01 09:18:45,Fractions (regular),6.NS.A.1,Pending Approval,fake_id
+fc55d5d9,2026-08-01 09:54:35,dividing fractions homework,pending,Approved,
+82c70b74,2026-08-01 09:57:30,Fractions (regular),6.NS.A.1,Pending Approval,fake_id

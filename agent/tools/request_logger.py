@@ -60,6 +60,24 @@ def update_task_status(task_id: str, new_status: str) -> str:
         
     return f"Task_ID {task_id} status updated to '{new_status}'."
 
+def get_recent_standard_codes(limit: int = 10) -> list:
+    """Distinct standard codes from the most recent log entries, newest first.
+
+    Skips placeholder values (real AZ codes contain dots, e.g. '6.NS.A.1').
+    """
+    if not LOG_FILE.exists():
+        return []
+    with open(LOG_FILE, mode="r", newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    codes = []
+    for row in reversed(rows):
+        code = (row.get("Standard_Code") or "").strip()
+        if code and "." in code and code not in codes:
+            codes.append(code)
+        if len(codes) >= limit:
+            break
+    return codes
+
 def get_recent_requests(limit: int = 5) -> str:
     """Return the most recent requests logged in the Nova Request Log, to help Nova recall recent topics."""
     if not LOG_FILE.exists():
