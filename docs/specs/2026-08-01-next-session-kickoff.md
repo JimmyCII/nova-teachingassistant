@@ -3,10 +3,16 @@
 > **UPDATE (same day, second session): Tiers 1 + 2 are DONE and verified in prod**
 > (revision 00016-7dc). Request log lives in Firestore (`nova_request_log`); a
 > session-start briefing is injected per WebSocket connect; cold-start recall
-> confirmed against a fresh prod revision. Remaining for a future session:
-> **Tier 3** (session-end summaries → `memories` collection) and **Tier 4**
-> (`save_memory` profile tool) from the 07-31 spec — that's the "Nova, remember
-> that I do spiral review on Thursdays" layer. Local dev note: Firestore uses
+> confirmed against a fresh prod revision.
+>
+> **Tier 4 is ALSO DONE** (same day, rev 00017-9c7): `save_memory`/`forget_memory`
+> persist facts to Firestore `nova_memories`, surfaced as a Known-facts briefing
+> block; the request log records `Requested_By` once a speaker introduces
+> themselves (never guessed from voice). Prod-verified via
+> tests/manual/nova_remember_test.py + nova_recall_test.py.
+>
+> Remaining for a future session: **Tier 3** (session-end conversation summaries
+> → briefing) from the 07-31 spec. Local dev note: Firestore uses
 > ADC (`gcloud auth application-default login`) + `GOOGLE_CLOUD_PROJECT` in `.env`;
 > tests force the CSV backend via `tests/conftest.py`.
 
