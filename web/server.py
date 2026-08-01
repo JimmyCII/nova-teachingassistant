@@ -33,10 +33,12 @@ from mcp_servers.comms_server.server import send_admin_alert_email
 load_dotenv()
 
 # Windows consoles default to cp1252, where the emoji in the [Orchestrator] prints raise
-# UnicodeEncodeError and kill the session coroutine at the FIRST tool call.
+# UnicodeEncodeError and kill the session coroutine at the FIRST tool call. line_buffering
+# matters on Cloud Run: without it, stdout is block-buffered and the [Orchestrator] lines
+# never reach the logs in time to be useful.
 for _stream in (sys.stdout, sys.stderr):
     if hasattr(_stream, "reconfigure"):
-        _stream.reconfigure(encoding="utf-8", errors="replace")
+        _stream.reconfigure(encoding="utf-8", errors="replace", line_buffering=True)
 
 API_KEY = os.getenv("GOOGLE_API_KEY", "").strip()
 # Live model + voice are configurable because the live model is a preview that changes.
